@@ -8,13 +8,23 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return dd(User::get());
+        return ($request->user()->type <= 2) ? dd(User::get()) : redirect('/home');
     }
 
     /**
@@ -22,9 +32,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('user.create');
+        return ($request->user()->type <= 2) ? view('users.create') : redirect('/home');
     }
 
     /**
@@ -35,8 +45,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        User::create($request->all());
-        return redirect('/user');
+        if ($request->user()->type == 1)
+            User::create($request->all());
+        return redirect('/users');
     }
 
     /**

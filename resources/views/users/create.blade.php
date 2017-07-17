@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>Register</h1>
+<h2>Create user</h2>
 
 <form method="post" action="/user">
 
