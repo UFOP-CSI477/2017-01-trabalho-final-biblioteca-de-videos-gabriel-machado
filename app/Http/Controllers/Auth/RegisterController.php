@@ -30,6 +30,17 @@ class RegisterController extends Controller
     protected $redirectTo = '/';
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return view('auth.register')->with('login_dropdown_hidden',true);;
+    }
+
+
+    /**
      * Create a new controller instance.
      *
      * @return void
