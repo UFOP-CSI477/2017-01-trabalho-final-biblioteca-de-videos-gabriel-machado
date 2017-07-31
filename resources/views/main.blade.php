@@ -81,6 +81,7 @@
     <title>Main</title>
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
+    @yield('styles')
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -96,14 +97,17 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-<!--             <li><a href="{{ url('/') }}">Home</a></li> -->
+            <li><a href="{{ url('/home') }}">Home</a></li>
+@if (Auth::user() and Auth::user()->type == 1)
+    <li><a href="{{ url('/users') }}">Users</a></li>
+@endif
           </ul>
           <ul class="nav navbar-nav navbar-right">
-          @if (Auth::guest())
-            @yield('navbar-right-login')
-          @else
-            @yield('navbar-right-user')
-          @endif
+@if (Auth::guest())
+    @yield('navbar-right-login')
+@else
+    @yield('navbar-right-user')
+@endif
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -113,6 +117,7 @@
 
     <script src="{{ asset('js/jquery-3.2.1.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
+    @yield('scripts')
   </body>
 </html>
 

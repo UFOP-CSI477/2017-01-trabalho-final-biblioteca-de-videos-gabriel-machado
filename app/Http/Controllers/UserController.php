@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        return ($request->user()->type <= 2) ? dd(User::get()) : redirect('/home');
+        return ($request->user()->type <= 2) ? view('users.list')->with('users',User::get()) : redirect('/home');
     }
 
     /**
@@ -34,7 +34,7 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
-        return ($request->user()->type <= 2) ? view('users.create') : redirect('/home');
+        return ($request->user()->type == 1) ? view('users.create') : redirect('/home');
     }
 
     /**
