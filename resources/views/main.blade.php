@@ -24,7 +24,7 @@
               <strong>{{ $errors->first('password') }}</strong>
             </span>
             @endif
-            <div class="help-block text-right"><a href="{{ route('password.request') }}">forgot password</a></div>
+<!--             <div class="help-block text-right"><a href="{{ route('password.request') }}">forgot password</a></div> -->
           </div>
           <div class="checkbox">
             <label>
@@ -80,7 +80,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Main</title>
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     @yield('styles')
   </head>
   <body>
@@ -97,9 +97,9 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="{{ url('/home') }}">Home</a></li>
+            {!! navItem('Home', '/home') !!}
 @if (Auth::user() and Auth::user()->type == 1)
-    <li><a href="{{ url('/users') }}">Users</a></li>
+    {!! navItem('Users', '/users') !!}
 @endif
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -113,7 +113,29 @@
       </div>
     </nav>
 
-    @yield('content')
+
+    <div class="container">
+      <div class="row mx-auto">
+@if(View::hasSection('panel-items'))
+        <div class="col-md-3">
+          <div class="sidebar">
+            <!-- SIDEBAR MENU -->
+            <div class="sidemenu">
+              <ul class="nav">
+                @yield('panel-items')
+              </ul>
+            </div>
+            <!-- END MENU -->
+          </div>
+        </div>
+@endif
+        <div class="{{ View::hasSection('panel-items') ? 'col-md-9' : 'col-md-10 col-md-offset-1' }}">
+          <div class="profile-content">
+            @yield('content')
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script src="{{ asset('js/jquery-3.2.1.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>

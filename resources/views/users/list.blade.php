@@ -1,10 +1,10 @@
-@extends('main')
+@extends('users.main')
 
 @section('content')
 
-<div class="container">
+
   <div class="row">
-    <div class="panel panel-primary filterable">
+    <div class="panel filterable">
       <div class="panel-heading">
           <h3 class="panel-title">Users</h3>
           <!--<div class="pull-right">
@@ -46,7 +46,7 @@ switch($u->type) {
       </table>
     </div>
   </div>
-</div>
+
 
 @endsection
 
