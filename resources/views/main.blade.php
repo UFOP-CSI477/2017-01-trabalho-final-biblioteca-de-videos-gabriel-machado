@@ -54,7 +54,7 @@
     <li>
       <div class="row">
         <div class="col-md-12">
-          <form class="form" role="form" method="post"  action="{{ route('logout') }}" accept-charset="UTF-8" id="login-nav">
+          <form class="form" role="form" method="post" action="{{ route('logout') }}" accept-charset="UTF-8" id="login-nav">
             {{ csrf_field() }}
             <div class="form-group">
               <button type="submit" class="btn btn-primary btn-block">Log out</button>
