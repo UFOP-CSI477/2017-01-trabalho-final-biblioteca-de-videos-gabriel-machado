@@ -10,25 +10,25 @@
           <div class="form-group">
             <label class="sr-only" for="email">email</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="email" value="{{ old('email') }}" required>
-            @if ($errors->has('email'))
+@if ($errors->has('email'))
             <span class="help-block">
               <strong>{{ $errors->first('email') }}</strong>
             </span>
-            @endif
+@endif
           </div>
           <div class="form-group">
             <label class="sr-only" for="password">Password</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
-            @if ($errors->has('password'))
+@if ($errors->has('password'))
             <span class="help-block">
               <strong>{{ $errors->first('password') }}</strong>
             </span>
-            @endif
+@endif
 <!--             <div class="help-block text-right"><a href="{{ route('password.request') }}">forgot password</a></div> -->
           </div>
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+              <input type="checkbox" name="remember"{{ old('remember') ? ' checked' : '' }}>
               keep me logged-in
             </label>
           </div>
@@ -98,7 +98,7 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             {!! navItem('Home', '/home') !!}
-@if (Auth::user() and Auth::user()->type == 1)
+@if (Auth::user() and Auth::user()->type <= 2)
     {!! navItem('Users', '/users') !!}
 @endif
           </ul>

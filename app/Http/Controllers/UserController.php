@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Auth\RegisterController;
 
 class UserController extends Controller
 {
@@ -24,7 +27,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        return ($request->user()->type <= 2) ? view('users.list')->with('users',User::get()) : redirect('/home');
+        return (Auth::user()->type <= 2) ? view('users.list')->with('users',User::get()) : redirect('/home');
     }
 
     /**
@@ -34,7 +37,7 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
-        return ($request->user()->type == 1) ? view('users.create') : redirect('/home');
+        return (Auth::user()->type == 1) ? view('users.create') : redirect('/home');
     }
 
     /**
@@ -45,8 +48,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->user()->type == 1)
-            User::create($request->all());
+        if (Auth::user()->type == 1) {
+            $validator = RegisterController::validator($request->all());
+            if ($validator->fails()) {
+                return redirect('users/create')->withErrors($validator)->withInput();
+            }
+            User::create([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'password' => bcrypt($request['password']),
+                'type' => $request['type']
+            ]);
+        }
         return redirect('/users');
     }
 
@@ -92,6 +105,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if (Auth::user()->type == 1)
+            User::destroy($user->id);
+
+        return redirect('/users');
     }
 }

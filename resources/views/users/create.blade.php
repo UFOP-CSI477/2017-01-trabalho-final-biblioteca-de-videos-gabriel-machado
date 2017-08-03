@@ -14,30 +14,51 @@
       {{ csrf_field() }}
 
       <div class="form-group">
-          <div class="col-xs-3"><label for="name">Name:</label></div>
-          <div class="col-xs-6"><input class="form-control" type="text" name="name" required></div>
+          <label for="name" class="col-md-3 control-label">Name:</label>
+          <div class="col-xs-6"><input class="form-control" type="text" name="name" value="{{ old('name') }}" required></div>
       </div>
 
       <div class="form-group">
-      <div class="col-xs-3"><label for="type">Type:</label></div>
+      <label for="type" class="col-md-3 control-label">Type:</label>
         <div class="col-xs-6">
           <select name="type" class="form-control" required>
-            <option value="" disabled selected>Type</option>
-            <option value="3">Client</option>
-            <option value="2">Operator</option>
-            <option value="1">Administrator</option>
+            <option value="" disabled{{ old('type') == '' ? ' selected' : '' }}>Type</option>
+            <option value="3"{{ old('type') == 3 ? ' selected' : '' }}>Client</option>
+            <option value="2"{{ old('type') == 2 ? ' selected' : '' }}>Operator</option>
+            <option value="1"{{ old('type') == 1 ? ' selected' : '' }}>Administrator</option>
           </select>
         </div>
       </div>
 
       <div class="form-group">
-          <div class="col-xs-3"><label for="email">email:</label></div>
-          <div class="col-xs-6"><input class="form-control" type="email" name="email" required></div>
+          <label for="email" class="col-md-3 control-label">email:</label>
+          <div class="col-xs-6">
+            <input class="form-control" type="email" name="email" value="{{ old('email') }}" required>
+@if ($errors->has('email'))
+              <span class="help-block">
+                <strong>{{ $errors->first('email') }}</strong>
+              </span>
+@endif
+          </div>
       </div>
 
       <div class="form-group">
-          <div class="col-xs-3"><label for="password">Password:</label></div>
-          <div class="col-xs-6"><input class="form-control" type="password" name="password" required></div>
+          <label for="password" class="col-md-3 control-label">Password:</label>
+          <div class="col-xs-6">
+            <input class="form-control" type="password" name="password" required>
+@if ($errors->has('password'))
+              <span class="help-block">
+                <strong>{{ $errors->first('password') }}</strong>
+              </span>
+@endif
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password-confirm" class="col-md-3 control-label">Confirm password:</label>
+        <div class="col-md-6">
+          <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+        </div>
       </div>
 
         <div class="form-group">

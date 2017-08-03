@@ -39,7 +39,6 @@ class RegisterController extends Controller
         return view('auth.register')->with('login_dropdown_hidden',true);;
     }
 
-
     /**
      * Create a new controller instance.
      *
@@ -56,7 +55,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    static public function validator(array $data)
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
