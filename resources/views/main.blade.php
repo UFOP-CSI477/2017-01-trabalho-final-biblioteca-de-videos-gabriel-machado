@@ -98,8 +98,12 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             {!! navItem('Home', '/home') !!}
-@if (Auth::user() and Auth::user()->type <= 2)
-    {!! navItem('Users', '/users') !!}
+
+@if (Auth::user())
+            {!! navItem('Procedures', '/procedures') !!}
+    @if ( Auth::user()->type <= 2)
+            {!! navItem('Users', '/users') !!}
+    @endif
 @endif
           </ul>
           <ul class="nav navbar-nav navbar-right">
