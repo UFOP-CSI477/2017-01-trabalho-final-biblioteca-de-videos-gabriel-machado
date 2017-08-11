@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Route::resource('users', 'UserController');
 Route::resource('procedures', 'ProcedureController');
+Route::resource('tests', 'TestController');
 
 Auth::routes();
 

@@ -101,6 +101,7 @@
 
 @if (Auth::user())
             {!! navItem('Procedures', '/procedures') !!}
+            {!! navItem('Tests', '/tests') !!}
     @if ( Auth::user()->type <= 2)
             {!! navItem('Users', '/users') !!}
     @endif
