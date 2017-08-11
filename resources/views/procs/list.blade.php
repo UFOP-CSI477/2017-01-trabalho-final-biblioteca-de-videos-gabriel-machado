@@ -26,11 +26,17 @@
           <td>{{ $p->id }}</td>
           <td>{{ $p->name }}</td>
           <td>{{ $p->price }}</td>
-@if (Auth::user()->type == 1)
+@if (Auth::user()->type <= 2)
           <td>
             <div class="dropdown">
               <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret"></span></button>
               <ul class="dropdown-menu">
+                <li>
+                  <form method="get" action="{{ route('procedures.edit', $p->id) }}">
+                    <button class="btn btn-link" type="submit">Edit</button>
+                  </form>
+                </li>
+@if (Auth::user()->type == 1)
                 <li>
                   <form class="form" role="form" method="post" action="{!! route('procedures.destroy', $p->id) !!}" accept-charset="UTF-8" id="login-nav">
                     {{ csrf_field() }}
@@ -38,6 +44,7 @@
                     <button class="btn btn-link" type="submit">Delete</button>
                   </form>
                 </li>
+@endif
               </ul>
             </div>
           </td>

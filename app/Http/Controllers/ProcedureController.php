@@ -68,12 +68,19 @@ class ProcedureController extends Controller
 
     public function edit($id)
     {
-        //
+        if (Auth::user()->type == 3)
+            return redirect('/procedures');
+        return view('procs.edit')->with('procedure',Procedure::find($id));
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $equip = Procedure::find($id);
+        if (Auth::user()->type == 1)
+            $equip->name = $request->all()['name'];
+        $equip->price = $request->all()['price'];
+        $equip->save();
+        return redirect('/procedures');
     }
 
     public function destroy($id)
