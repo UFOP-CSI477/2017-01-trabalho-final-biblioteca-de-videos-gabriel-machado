@@ -2,8 +2,6 @@
 
 @section('content')
 
-<p>
-    This is only visible to authenticated users
-</p>
+<img src="frame/37">
 
 @endsection

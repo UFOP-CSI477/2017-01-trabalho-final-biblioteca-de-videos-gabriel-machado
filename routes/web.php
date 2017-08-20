@@ -22,3 +22,4 @@ Route::resource('tests', 'TestController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/frame/{id}', 'FrameController@show');
