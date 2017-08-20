@@ -7,11 +7,6 @@ use App\Frame;
 
 class FrameController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -24,7 +19,7 @@ class FrameController extends Controller
 
     public function show($id)
     {
-        $response = response(Frame::find($id)->video->first_frame->data, 200);
+        $response = response(Frame::find($id)->data, 200);
         $response->header('Content-Type', 'image/png');
         return $response;
     }

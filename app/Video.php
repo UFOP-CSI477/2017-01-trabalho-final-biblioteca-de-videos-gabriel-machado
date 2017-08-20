@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Video extends Model
 {
+    public function camera() {
+        return $this->belongsTo('App\Camera');
+    }
+
     public function frames() {
         return $this->hasMany('App\Frame');
     }

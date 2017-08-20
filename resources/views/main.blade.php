@@ -135,7 +135,7 @@
         </div>
 @endif
         <div class="{{ View::hasSection('panel-items') ? 'col-md-9' : 'col-md-10 col-md-offset-1' }}">
-          <div class="profile-content">
+          <div class="content">
             @yield('content')
           </div>
         </div>
