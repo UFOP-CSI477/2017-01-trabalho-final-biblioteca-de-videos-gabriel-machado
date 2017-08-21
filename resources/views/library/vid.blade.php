@@ -6,7 +6,22 @@
 <div class="row">
   <h1>{{ $vid->datetime }}</h1>
   <div class="col-md-10 col-md-offset-1 thumbnail-pad">
-    <img id="videoframe" class="img-fluid img-thumbnail" src="/frame/{{ $vid->first_frame->id }}" alt="">
+    <div class="img-thumbnail">
+      <img id="videoframe" class="img-fluid" src="/frame/{{ $vid->first_frame->id }}" alt="">
+    </div>
+    <div class="pull-left">
+      <button class="btn btn-link" id="prev"><span class="glyphicon glyphicon-step-backward"></button>
+      <button class="btn btn-link" id="play"><span class="glyphicon glyphicon-play"></span></button>
+      <button class="btn btn-link" id="next"><span class="glyphicon glyphicon-step-forward"></span></button>
+      <span class="btn" id="framenum" role="icon">0</span>
+    </div>
+<!--    <div class="pull-right btn-group">
+      <form class="form" role="form" method="post" action="/library/video/{{ $vid->id }}/flag" accept-charset="UTF-8" id="login-nav">
+        {{ csrf_field() }}
+        <input type="hidden" id="frameid" name="frame" value="-1">
+        <button class="btn btn-link" type="submit"><span class="glyphicon glyphicon-flag"></span></button>
+      </form>
+    </div>-->
   </div>
 </div>
 
@@ -65,36 +80,68 @@
 
 @section('scripts')
 <script>
-    var frames;
-    $(document).ready(function() {
+$(document).ready(function() {
+    var frames
+    var playing = false
+    var label = $('#framenum'), frameid = $('#frameid')
+
+    updateFrame = function() {
+        var myImageElement = document.getElementById("videoframe");
+        myImageElement.onload = function() {
+            label.html(counter)
+            frameid.val(frames[counter])
+        };
+        myImageElement.src = "/frame/" + frames[counter];
+    }
 
     var counter = 0,
     interval,
-    label = $("#framenum"),
-    fx = function() {
+    play = function() {
+        playing = true;
+        $('#play>span').attr('class', 'glyphicon glyphicon-pause');
         interval = setInterval(function() {
-            var myImageElement = document.getElementById("videoframe");
-            myImageElement.onload = function() {label.html(counter)};
-            myImageElement.src = "/frame/" + frames[counter];
             counter = (counter+1) % frames.length;
+            updateFrame()
         }, 500);
     };
 
     $.getJSON( "/library/video/{{ $vid->id }}/seq", function(data) {
         frames = data;
-        fx()
+        play()
     });
 
+    stop = function() {
+        playing = false
+        $('#play>span').attr('class', 'glyphicon glyphicon-play');
+        clearInterval(interval)
+    }
 
-    $("button").click(function() {
-        clearInterval(interval);
-        switch ($(this).index("button")) {
-            case 0: label.html(--counter);break;
-            case 1: clearInterval(interval);break;
-            case 2: fx();break;
-            case 3: label.html(++counter);break;
-        };
-    })
+    $('#play').click(function() {
+        if (playing) {
+            stop();
+        } else {
+            play();
+        }
+    });
+
+    $('#rewind').click(function() {
+        counter = 0;
+        updateFrame();
+    });
+
+    $('#prev').click(function() {
+        stop();
+        --counter;
+        if (counter < 0)
+            counter = frames.length-1;
+        updateFrame();
+    });
+
+    $('#next').click(function() {
+        stop();
+        counter = (counter+1) % frames.length;
+        updateFrame();
+    });
 });
 </script>
 @endsection
