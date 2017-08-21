@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Camera;
 use App\Video;
 use App\Frame;
-use App\Comment;
+use App\VideoComment;
 
 class LibraryController extends Controller
 {
@@ -45,7 +45,7 @@ class LibraryController extends Controller
         if ($validator->fails()) {
             return redirect('/library/video/' . $id);
         }
-        Comment::create([
+        VideoComment::create([
             'user_id' => Auth::user()->id,
             'video_id' => $id,
             'text' => $request['comment'],
@@ -55,9 +55,9 @@ class LibraryController extends Controller
 
     public function delete_comment($id)
     {
-        $c = Comment::find($id);
+        $c = VideoComment::find($id);
         if (Auth::user() == $c->user)
-            Comment::destroy($id);
+            VideoComment::destroy($id);
 
         return redirect('/library/video/' . $c->video_id);
     }
