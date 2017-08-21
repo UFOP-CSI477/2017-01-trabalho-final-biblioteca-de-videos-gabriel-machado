@@ -22,4 +22,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/frame/{id}', 'FrameController@show');
 Route::get('/library', 'LibraryController@index');
-Route::get('/library/{cam}', 'LibraryController@camera');
+Route::get('/library/camera/{cam}', 'LibraryController@camera');
+Route::get('/library/video/{cam}', 'LibraryController@video');
+Route::get('/library/video/{cam}/seq', 'LibraryController@videoSeq');

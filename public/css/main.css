@@ -85,3 +85,56 @@ body {
 .thumbnail-pad {
     padding-bottom:30px;
 }
+
+.thumbnail {
+    padding:0px;
+}
+.comment {
+    position:relative;
+}
+
+.ticked:after,.ticked:before {
+    position:absolute;
+    top:11px;left:-16px;
+    right:100%;
+    width:0;
+    height:0;
+    display:block;
+    content:" ";
+    border-color:transparent;
+    border-style:solid solid outset;
+    pointer-events:none;
+}
+
+.ticked:after {
+    border-width:7px;
+    border-right-color:#f7f7f7;
+    margin-top:1px;
+    margin-left:2px;
+}
+
+.ticked:before {
+    border-right-color:#ddd;
+    border-width:8px;
+}
+
+.panel-body.ticked:after {
+    border-right-color:#fff;
+}
+
+.gi-2x{font-size: 2em;}
+.gi-3x{font-size: 3em;}
+.gi-4x{font-size: 4em;}
+.gi-5x{font-size: 5em;}
+
+[role="icon"] {
+    cursor: default;
+}
+
+.commentbox, .commentbox:active {
+    border: none;
+    overflow: auto;
+    outline: none;
+    box-shadow: none;
+    resize: none;
+}
