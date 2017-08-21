@@ -22,9 +22,14 @@ class LibraryController extends Controller
         return view('library.main');
     }
 
-    public function camera($id)
+    public function camera($id, Request $request)
     {
-        return view('library.cam')->with('cam',Camera::find($id));
+        $vids = Video::where('camera_id','=',$id);
+        if ($request['month']) {
+            $vids = $vids->whereRaw("strftime('%m', `datetime`) = ?",[$request['month']]);
+        }
+        $vids->orderBy('datetime');
+        return view('library.cam')->with('vids',$vids->get());
     }
 
     public function video($id)

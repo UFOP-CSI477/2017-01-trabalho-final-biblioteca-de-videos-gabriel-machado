@@ -4,14 +4,14 @@
 
 
 <div class="row">
-  <h1>{{ $vid->datetime }}</h1>
+  <h2>{{ $vid->datetime }}</h2>
   <div class="col-md-10 col-md-offset-1 thumbnail-pad">
     <div class="img-thumbnail">
-      <img id="videoframe" class="img-fluid" src="/frame/{{ $vid->first_frame->id }}" alt="">
+      <img id="videoframe" class="img-fluid play" src="/frame/{{ $vid->first_frame->id }}" alt="">
     </div>
     <div class="pull-left">
       <button class="btn btn-link" id="prev"><span class="glyphicon glyphicon-step-backward"></button>
-      <button class="btn btn-link" id="play"><span class="glyphicon glyphicon-play"></span></button>
+      <button class="btn btn-link play" id="play"><span class="glyphicon glyphicon-play"></span></button>
       <button class="btn btn-link" id="next"><span class="glyphicon glyphicon-step-forward"></span></button>
       <span class="btn" id="framenum" role="icon">0</span>
     </div>
@@ -65,7 +65,7 @@
   {{ csrf_field() }}
 
   <div class="form-group">
-    <div class="col-xs-7 col-md-offset-2">
+    <div class="col-md-7 col-md-offset-2">
       <h3>Comment</h3>
       <textarea name="comment" class="form-control"></textarea>
     </div>
@@ -116,7 +116,7 @@ $(document).ready(function() {
         clearInterval(interval)
     }
 
-    $('#play').click(function() {
+    $('.play').click(function() {
         if (playing) {
             stop();
         } else {

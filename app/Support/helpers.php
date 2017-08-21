@@ -31,3 +31,10 @@ if (!function_exists('menuItem')) {
         return '<li' . classActivePath($path) . '><a href="' . url($path) . '">' . $text . '</a></li>';
     }
 }
+
+if (!function_exists('filterItem')) {
+    function filterItem($text,$month)
+    {
+        return '<a href="' . (Request::get('month') == $month ? '?month=' : '?month=' . $month) . '" class="btn month-btn ' . (Request::get('month') == $month ? 'active' : 'btn-link') . '">' . $text . '</a>';
+    }
+}

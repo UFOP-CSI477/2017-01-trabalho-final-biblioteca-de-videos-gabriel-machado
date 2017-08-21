@@ -41,6 +41,10 @@ body {
     background: #fff;
 }
 
+.sidebar, .sidefilter {
+    margin-bottom: 30px;
+}
+
 .sidemenu ul li {
     border-bottom: 1px solid #f0f4f7;
 }
@@ -133,4 +137,12 @@ body {
 
 .dropdown-menu {
     min-width: 0px;
+}
+
+.month-btn {
+    width: 50px;
+}
+
+#videoframe {
+    width: 100%;
 }

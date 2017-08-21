@@ -1,6 +1,6 @@
 @section('navbar-right-login')
 <li class="dropdown{{ isset($login_dropdown_hidden) ? '' : ' open' }}">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Sign in</b> <span class="caret"></span></a>
   <ul id="login-dp" class="dropdown-menu">
     <li>
       <div class="row">
@@ -32,14 +32,14 @@
               keep me logged-in
             </label>
           </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block">Log in</button>
+          <div class="form-group bottom">
+            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
           </div>
         </form>
       </div>
-      <div class="bottom text-center">
-          <a href="{{ route('register') }}"><b>Sign in</b></a>
-      </div>
+<!--      <div class="bottom text-center">
+          <a href="{{ route('register') }}"><b>Sign up</b></a>
+      </div>-->
       </div>
     </li>
   </ul>
@@ -95,12 +95,11 @@
           </button>
           <a class="navbar-brand" href="{{ url('/') }}">Main</a>
         </div>
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse" id="navbar">
           <ul class="nav navbar-nav">
-            {!! navItem('Home', '/home') !!}
+            {!! navItem('Library', '/library') !!}
 
 @if (Auth::user())
-            {!! navItem('Library', '/library') !!}
     @if ( Auth::user()->type <= 2)
             {!! navItem('Users', '/users') !!}
     @endif
@@ -122,15 +121,22 @@
       <div class="row mx-auto">
 @if(View::hasSection('panel-items'))
         <div class="col-md-3">
+        <div class="row">
+
           <div class="sidebar">
-            <!-- SIDEBAR MENU -->
             <div class="sidemenu">
               <ul class="nav">
                 @yield('panel-items')
               </ul>
             </div>
-            <!-- END MENU -->
           </div>
+        </div>
+
+        <div class="row">
+          <div class="btn-group sidefilter">
+            @yield('filter-items')
+          </div>
+        </div>
         </div>
 @endif
         <div class="{{ View::hasSection('panel-items') ? 'col-md-9' : 'col-md-10 col-md-offset-1' }}">
