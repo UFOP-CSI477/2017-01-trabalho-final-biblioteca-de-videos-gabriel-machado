@@ -131,10 +131,6 @@ body {
     cursor: default;
 }
 
-.commentbox, .commentbox:active {
-    border: none;
-    overflow: auto;
-    outline: none;
-    box-shadow: none;
-    resize: none;
+.dropdown-menu {
+    min-width: 0px;
 }

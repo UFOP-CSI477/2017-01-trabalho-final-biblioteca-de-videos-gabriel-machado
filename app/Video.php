@@ -14,6 +14,10 @@ class Video extends Model
         return $this->hasMany('App\Frame');
     }
 
+    public function comments() {
+        return $this->hasMany('App\Comment');
+    }
+
     public function getFirstFrameAttribute() {
         return $this->frames()->orderBy('seq')->first();
     }
