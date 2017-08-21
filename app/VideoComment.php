@@ -2,13 +2,10 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class VideoComment extends Authenticatable
+class VideoComment extends Model
 {
-    use Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
