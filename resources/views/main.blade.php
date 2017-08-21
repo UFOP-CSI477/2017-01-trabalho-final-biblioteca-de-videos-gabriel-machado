@@ -100,8 +100,7 @@
             {!! navItem('Home', '/home') !!}
 
 @if (Auth::user())
-            {!! navItem('Procedures', '/procedures') !!}
-            {!! navItem('Tests', '/tests') !!}
+            {!! navItem('Library', '/library') !!}
     @if ( Auth::user()->type <= 2)
             {!! navItem('Users', '/users') !!}
     @endif

@@ -20,7 +20,7 @@ class FrameController extends Controller
     public function show($id)
     {
         $response = response(Frame::find($id)->data, 200);
-        $response->header('Content-Type', 'image/png');
+        $response->header('Content-Type', 'image/jpeg');
         return $response;
     }
 }
